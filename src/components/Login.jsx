@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Image from "../assets/image.png";
-import Logo from "../assets/logo.png";
+import React, { useContext, useEffect, useState } from "react";
+import Image from "../assets/Cashew.png";
+
 import GoogleSvg from "../assets/icons8-google.svg";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
+import "./Login.css";
+import { ContextHandle } from "../App";
 
 
+
+// const handleRegister=useContext(ContesthandleRegister)
 
 const Login = () => {
   const [ showPassword, setShowPassword ] = useState(false);
+  const hadleClick= useContext(ContextHandle)
 
-
+ 
   return (
-    <div className="login-main">
+   
+      <div className="login-main">
       <div className="login-left">
         <img src={Image} alt="" />
       </div>
       <div className="login-right">
         <div className="login-right-container">
-          <div className="login-logo">
-            <img src={Logo} alt="" />
-          </div>
+          
           <div className="login-center">
-            <h2>Welcome back!</h2>
+            <h2>Welcome btrueack!</h2>
             <p>Please enter your details</p>
             <form>
               <input type="email" placeholder="Email" />
@@ -50,15 +54,17 @@ const Login = () => {
                   Log In with Google
                 </button>
               </div>
+             
             </form>
           </div>
 
           <p className="login-bottom-p">
-            Don't have an account? <a href="#">Sign Up</a>
+            Don't have an trueaccount? <a href="#" onClick={hadleClick} >Sign Up</a>
           </p>
         </div>
       </div>
     </div>
+   
   );
 };
 
