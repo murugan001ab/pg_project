@@ -1,85 +1,71 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "../assets/Cashew.png";
-import GoogleSvg from "../assets/icons8-google.svg";
-import { FaEye } from "react-icons/fa6";
-import { FaEyeSlash } from "react-icons/fa6";
-import "./Login.css";
-import { ContextHandle } from "../App";
-import Loder from "./Loder";
-import { Link } from "react-router-dom";
+import {useState} from 'react';
+import { Link } from 'react-router-dom';
+import api from '../api/axios';
+import axios from 'axios';
 
-const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const hadleClick = useContext(ContextHandle);
-  const [loading, setLoading] = useState(false);
+
+
+
+const SignupPage = () => {
+
+  const [username, setUsername] =useState('');
+  const [password, setPassword] =useState('');
+  const [error, setError] =useState('');
+  const [loading, setLoading] =useState(false);
+  const [success, setSuccess] =useState(false);
+
+ const handleLogin = async (e) => {
+    e.preventDefault();
+    // Perform login logic here
+    setLoading(true);
+    await axios.post('http://localhost:8000/auth/login/', {
+     username,password
+    })
+    .then((response) => {
+      console.log(response.data);
+      setSuccess(true);
+      setLoading(false);
+      localStorage.setItem('accessToken', response.data.accessToken);
+    }).catch((error) => {
+      console.log(error.response.data.message);
+      setError(error.response.data.message);
+      setLoading(false);
+    });
+
+
+
+  }
 
   return (
-    <div className="login-main">
-      {loading && (
-        <div className="loader-container">
-
-         { loading && 
-            <Loder />
-          }
-          
+    <div className="signup-container">
+      <div className="signup-wrapper">
+        <div className="signup-info">
+          <h2>Create a resume you are proud of</h2>
+          <ul>
+            <li>Save time with hassle-free templates</li>
+            <li>Beat the competition using actionable, contextual advice</li>
+            <li> Highlight key achievements with memorable visuals</li>
+          </ul>
+          <a href="#">Get inspired by 1800+ Free Resume Examples and Templates</a>
         </div>
-      )}
-      <div className="login-left">
-        <img src={Image} alt="" />
-      </div>
-      <div className="login-right">
-        <div className="login-right-container">
-          <div className="login-center">
-            <h2>Welcome btrueack!</h2>
-            <p>Please enter your details</p>
-            <form>
-              <input type="email" placeholder="Email" />
-              <div className="pass-input-div">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                />
-                {showPassword ? (
-                  <FaEyeSlash
-                    onClick={() => {
-                      setShowPassword(!showPassword);
-                    }}
-                  />
-                ) : (
-                  <FaEye
-                    onClick={() => {
-                      setShowPassword(!showPassword);
-                    }}
-                  />
-                )}
-              </div>
-              <div className="login-center-options">
-                <div className="remember-div">
-                  <input type="checkbox" id="remember-checkbox" />
-                  <label htmlFor="remember-checkbox">
-                    Remember for 30 days
-                  </label>
-                </div>
-                <a href="#" className="forgot-pass-link">
-                  Forgot password?
-                </a>
-              </div>
-              <div className="login-center-buttons">
-                <button type="button">Log In</button>
-                <button type="button">
-                  <img src={GoogleSvg} alt="" />
-                  Log In with Google
-                </button>
-              </div>
-            </form>
-          </div>
-         <Link to="/register"><p className="login-bottom-p">
-            Don't have an trueaccount? <a href="#" onClick={hadleClick}>Sign Up</a>
-          </p></Link> 
+
+        <div className="signup-form">
+          <h2>Sign in your account</h2>
+          {/* <button className="social-btn linkedin">LinkedIn</button>
+          <button className="social-btn google">Google</button>
+          <button className="social-btn facebook">Facebook</button> */}
+          {/* <p>or use your email</p> */}
+          <input type="text" placeholder="username" onChange={(e)=>setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
+          <button className="create-account" onClick={(e)=>handleLogin(e)} >Sign In</button>
+          <p className="login-options">
+            Forgot your password? <a href="#">Reset</a>
+          </p>
+          <p>First time here? <Link to="/register"> Create an account </Link></p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default SignupPage;

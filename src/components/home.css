@@ -14,12 +14,16 @@
   padding: 20px 50px;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 2;
+
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
   color: #0fbcf9;
+  user-select: none;
 }
 
 nav ul {
@@ -53,21 +57,26 @@ nav ul li {
   background-color: transparent;
   border: 1.5px solid #4bcffa;
   color: #4bcffa;
+  cursor: pointer;
+
 }
 
 .sign-in:hover {
   color: #4bcffa;
-  background-color: #ddf7ff;
+  background-color: #c4f1ff;
 }
 
 .get-started {
   background-color: #0fbcf9;
   color: white;
+ 
+
 }
 
 .get-started:hover {
-  background-color: #43ccfe;
+  background-color: #4bcffa;
   color: white;
+  cursor: pointer;
 }
 
 /* Hero Section Styles */
@@ -79,12 +88,13 @@ nav ul li {
   text-align: left;
   z-index: 1;
   position: relative;
+ 
 }
 
 .svgImage {
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: -99;
   position: absolute;
   transform: scale(2.5);
 }
@@ -159,6 +169,7 @@ nav ul li {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 
 /* Footer Styles */

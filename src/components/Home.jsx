@@ -18,7 +18,7 @@ const Header = () => {
         </ul>
       </nav>
       <div className="auth-buttons">
-      <Link to="/login"> <button className="sign-in">Sign In</button> </Link>
+       <Link to="/login" ><button className="sign-in">Sign In</button></Link>
         <button className="get-started">Get Started</button>
       </div>
     </header>
@@ -68,7 +68,6 @@ const Home = () => {
       <main className="container">
       <HeroSection />
       <TemplatesSection />
-     
       </main>
       <Footer />
     </div>

@@ -1,36 +1,30 @@
-import { createContext, useState } from "react"
-import Login from "./components/Login"
-import Register from "./components/Register"
+import { createContext, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import Home from "./components/Home";
-import { Route, Router,Routes } from "react-router-dom";
-
 
 export const ContextHandle = createContext();
 
-
-
 function App() {
-
-
-  const [isRgestered, setIsRegistered] = useState(false)
+  const [isRegistered, setIsRegistered] = useState(false);
   const handleRegister = () => {
-    setIsRegistered(!isRgestered)
-  }
+    setIsRegistered(!isRegistered);
+  };
+
+  const location = useLocation(); // Get the current route
 
   return (
     <>
       <Routes>
-      <Route path="/login" element={<Login/>} />
-      <Route path="/register" element={<Register/>} />
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
 
-      <Home />
-
-
-
-
+      {/* Only show Home if the current route is not /login or /register */}
+      {location.pathname !== "/login" && location.pathname !== "/register" && <Home />}
     </>
-  )
+  );
 }
-export default App
+
+export default App;
